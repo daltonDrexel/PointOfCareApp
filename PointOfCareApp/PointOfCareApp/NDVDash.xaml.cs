@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using PointOfCareApp.CustomViews;
 
 namespace PointOfCareApp
 {
@@ -29,7 +30,8 @@ namespace PointOfCareApp
 
             PermissionsTestText.Text = status.ToString();
 
-            var photo = await imgHand.TakePhoto();
+            //var photo = imgHand.TakePhoto();
+            //imgHand.TakePhoto();
             Console.WriteLine();
         }
         async void StopButtonClicked(object sender, EventArgs args)

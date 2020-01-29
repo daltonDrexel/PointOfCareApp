@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointOfCareApp.Android", "P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointOfCareApp.iOS", "PointOfCareApp\PointOfCareApp.iOS\PointOfCareApp.iOS.csproj", "{AF1759A7-350F-4C62-A53F-56EE6C224E08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointOfCareApp", "PointOfCareApp\PointOfCareApp\PointOfCareApp.csproj", "{93480013-D35A-4DB2-84EA-D5BEB5EF6785}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PointOfCareApp", "PointOfCareApp\PointOfCareApp\PointOfCareApp.csproj", "{93480013-D35A-4DB2-84EA-D5BEB5EF6785}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,6 +4,10 @@ using System.Drawing.Imaging;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using PointOfCareApp.CustomViews;
+
 
 namespace PointOfCareApp
 {
@@ -29,15 +33,11 @@ namespace PointOfCareApp
         private int yBot = 760;        
 
 
-        public async Task<object> TakePhoto()
-        {
-            var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
-
-            if (photo != null)
-                return photo;
-            else
-                return null;
-        }
+        //public async Task<MediaFile> TakePhoto()
+        //{
+        //    CameraPreview.CameraClick.Execute(null);
+            //CameraPreview.CameraClick.Execute(null);
+        //}
 
 
         public void MainRun()
