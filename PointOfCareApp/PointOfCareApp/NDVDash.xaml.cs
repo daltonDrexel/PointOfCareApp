@@ -22,15 +22,15 @@ namespace PointOfCareApp
         public NDVDash()
         {
             InitializeComponent();
-            //CameraPreview.PictureFinished += OnPictureFinished;
+            CameraPreview.PictureFinished += OnPictureFinished;
         }
 
         async void StartButtonClicked(object sender, EventArgs args)
         {
-            var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+            //var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
 
-            PermissionsTestText.Text = status.ToString();
-            //CameraPreview.CameraClick.Execute(null);
+            //PermissionsTestText.Text = status.ToString();
+            CameraPreview.CameraClick.Execute(null);
             //var photo = imgHand.TakePhoto();
             //imgHand.TakePhoto();
             Console.WriteLine();
@@ -39,6 +39,7 @@ namespace PointOfCareApp
         {
             bool answer = await DisplayAlert("Abort", "Would you like to abort the test?", "Yes", "No");
         }
+
 
         private void OnPictureFinished()
         {

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:cameraView="clr-namespace:PointOfCareApp.CustomViews"
              mc:Ignorable="d"
              x:Class="PointOfCareApp.NDVDash">
     <ContentPage.Content>
@@ -44,7 +45,15 @@
                 FontSize="Medium"
                 VerticalOptions="Center" 
                 HorizontalOptions="StartAndExpand" />
-
+            <cameraView:CameraPreview  
+                    x:Name="CameraPreview"           
+                    BackgroundColor="Black"
+                    HorizontalOptions="FillAndExpand"
+                    Camera="Rear"                                         
+                    Margin="0,0,0,0"
+                    VerticalOptions="FillAndExpand"
+                    Grid.Column="0" Grid.Row="0">
+            </cameraView:CameraPreview>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

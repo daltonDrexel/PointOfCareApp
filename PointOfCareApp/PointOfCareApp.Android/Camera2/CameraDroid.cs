@@ -89,9 +89,9 @@ namespace PointOfCareApp.Camera2
             if (inflater == null) return;
             var view = inflater.Inflate(Resource.Layout.CameraLayout, this);
 
-            //_cameraTexture = view.FindViewById<TextureView>(Resource.Id.cameraTexture);
+            _cameraTexture = view.FindViewById<TextureView>(Resource.Id.cameraTexture);
 
-            //_cameraTexture.SurfaceTextureListener = this;
+            _cameraTexture.SurfaceTextureListener = this;
 
             _cameraStateListener = new CameraStateListener { Camera = this };
 

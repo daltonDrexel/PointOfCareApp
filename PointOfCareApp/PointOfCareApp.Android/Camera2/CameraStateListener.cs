@@ -11,7 +11,7 @@ namespace PointOfCareApp.Camera2
 			if (Camera == null) return;
 
 			Camera.CameraDevice = camera;
-			//Camera.StartPreview();
+			Camera.StartPreview();
 			Camera.OpeningCamera = false;
 		}
 
