@@ -8,6 +8,11 @@
              x:Class="PointOfCareApp.NDVDash">
     <ContentPage.Content>
         <StackLayout>
+            <ActivityIndicator 
+            Color="Red" 
+            IsRunning="{Binding IsBusy}" 
+            VerticalOptions="Center" 
+            HorizontalOptions="StartAndExpand" />
             <Button Text="Start"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
@@ -17,8 +22,7 @@
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 Clicked="StopButtonClicked" />
-
-
+            
             <Label Text="00:30:00 Reaction Time"
                 FontSize="Medium"
                 VerticalOptions="Center" 
@@ -35,21 +39,15 @@
                 HorizontalOptions="StartAndExpand" />
 
             <Label Text="Time Remaining - 00:00:00"
+                x:Name="TimeRemainingTextBox"
                 FontSize="Medium"
                 VerticalOptions="End" 
                 HorizontalOptions="CenterAndExpand" />
-
-
-            <Label Text="Permissions"
-                x:Name="PermissionsTestText"
-                FontSize="Medium"
-                VerticalOptions="Center" 
-                HorizontalOptions="StartAndExpand" />
             <cameraView:CameraPreview  
                     x:Name="CameraPreview"           
                     BackgroundColor="Black"
                     HorizontalOptions="FillAndExpand"
-                    Camera="Rear"                                         
+                    Camera="Front"                                         
                     Margin="0,0,0,0"
                     VerticalOptions="FillAndExpand"
                     Grid.Column="0" Grid.Row="0">

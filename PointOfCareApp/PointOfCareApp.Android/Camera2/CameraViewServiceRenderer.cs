@@ -16,6 +16,8 @@ namespace PointOfCareApp.Camera2
         private CameraPreview _currentElement;
         private readonly Context _context;
 
+        private int picIndex = 1;
+
         public CameraViewServiceRenderer(Context context) : base(context)
         {
             _context = context;
@@ -45,9 +47,19 @@ namespace PointOfCareApp.Camera2
 
         private void OnPhoto(object sender, byte[] imgSource)
         {
-            //Here you have the image byte data to do whatever you want 
-
-
+            try
+            {
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.InMutable = true;
+                Bitmap bmp = BitmapFactory.DecodeByteArray(imgSource, 0, imgSource.Length, options);
+                NDVDash.pics.Add(picIndex, bmp);
+                picIndex++;
+                Console.WriteLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
+            }
             Device.BeginInvokeOnMainThread(() =>
             {
                 _currentElement?.PictureTaken();

@@ -14,7 +14,7 @@ namespace PointOfCareApp
     class ImageProcessHandler
     {
         private string path = "C:\\Users\\ccd65\\Desktop\\MOHAMED CHIP";
-        private SortedDictionary<int, Bitmap> data = new SortedDictionary<int, Bitmap>();
+        //private SortedDictionary<int, Bitmap> data = new SortedDictionary<int, Bitmap>();
         private Dictionary<int, Dictionary<int, int>> results = new Dictionary<int, Dictionary<int, int>>();
 
         private int channelOneX = 220;
@@ -33,55 +33,48 @@ namespace PointOfCareApp
         private int yBot = 760;        
 
 
-        //public async Task<MediaFile> TakePhoto()
-        //{
-        //    CameraPreview.CameraClick.Execute(null);
-            //CameraPreview.CameraClick.Execute(null);
-        //}
-
-
         public void MainRun()
         {
-            GetData();
-            GetIntensitiesFromData();
-            SaveResultsToCSV();
+            //GetData();
+            //GetIntensitiesFromData();
+            //SaveResultsToCSV();
         }
 
-        private void SaveResultsToCSV()
-        {
+        //private void SaveResultsToCSV()
+        //{
 
-            List<string> lines = new List<string>();
+        //    List<string> lines = new List<string>();
 
-            foreach (int dataSet in results[1].Values)
-            {
-                lines.Add(dataSet.ToString());
-            }
-            File.WriteAllLines("C:\\Users\\ccd65\\Desktop\\channel1.txt", lines);
-            lines.Clear();
+        //    foreach (int dataSet in results[1].Values)
+        //    {
+        //        lines.Add(dataSet.ToString());
+        //    }
+        //    File.WriteAllLines("C:\\Users\\ccd65\\Desktop\\channel1.txt", lines);
+        //    lines.Clear();
 
-            foreach (int dataSet in results[2].Values)
-            {
-                lines.Add(dataSet.ToString());
-            }
-            File.WriteAllLines("C:\\Users\\ccd65\\Desktop\\channel2.txt", lines);
-            lines.Clear();
+        //    foreach (int dataSet in results[2].Values)
+        //    {
+        //        lines.Add(dataSet.ToString());
+        //    }
+        //    File.WriteAllLines("C:\\Users\\ccd65\\Desktop\\channel2.txt", lines);
+        //    lines.Clear();
 
-            foreach (int dataSet in results[3].Values)
-            {
-                lines.Add(dataSet.ToString());
-            }
-            File.WriteAllLines("C:\\Users\\ccd65\\Desktop\\channel3.txt", lines);
-            lines.Clear();
+        //    foreach (int dataSet in results[3].Values)
+        //    {
+        //        lines.Add(dataSet.ToString());
+        //    }
+        //    File.WriteAllLines("C:\\Users\\ccd65\\Desktop\\channel3.txt", lines);
+        //    lines.Clear();
 
-            foreach (int dataSet in results[4].Values)
-            {
-                lines.Add(dataSet.ToString());
-            }
-            File.WriteAllLines("C:\\Users\\ccd65\\Desktop\\channel4.txt", lines);
-            lines.Clear();
-        }
+        //    foreach (int dataSet in results[4].Values)
+        //    {
+        //        lines.Add(dataSet.ToString());
+        //    }
+        //    File.WriteAllLines("C:\\Users\\ccd65\\Desktop\\channel4.txt", lines);
+        //    lines.Clear();
+        //}
 
-        private void GetIntensitiesFromData()
+        public void GetIntensitiesFromData(SortedDictionary<int, Bitmap> data)
         {
 
             Dictionary<int, int> channelOneInten = new Dictionary<int, int>();
@@ -163,15 +156,15 @@ namespace PointOfCareApp
 
 
 
-        private void GetData()
-        {
-            string[] pictures = Directory.GetFiles(path);
+        //private void GetData()
+        //{
+        //    string[] pictures = Directory.GetFiles(path);
 
-            foreach (string pict in pictures)
-            {
-                data.Add(Convert.ToInt32(Path.GetFileNameWithoutExtension(pict)), new Bitmap(pict));
-            }
-        }
+        //    foreach (string pict in pictures)
+        //    {
+        //        data.Add(Convert.ToInt32(Path.GetFileNameWithoutExtension(pict)), new Bitmap(pict));
+        //    }
+        //}
 
     }
 }
