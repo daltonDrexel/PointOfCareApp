@@ -18,7 +18,6 @@ namespace PointOfCareApp
         public MainPage()
         {
             InitializeComponent();
-            //ClientHandler clientHandler = new ClientHandler();
         }
 
         async void OnButtonClicked(object sender, EventArgs args)

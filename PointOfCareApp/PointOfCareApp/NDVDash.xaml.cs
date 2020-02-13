@@ -17,7 +17,7 @@ namespace PointOfCareApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NDVDash : ContentPage
     {
-
+        ClientHandler clientHandler = new ClientHandler();
         ImageProcessHandler imgHand = new ImageProcessHandler();
         public static SortedDictionary<int, Bitmap> pics = new SortedDictionary<int, Bitmap>();
 
@@ -74,7 +74,7 @@ namespace PointOfCareApp
             reactionStart = DateTime.Now;
 
             //Test Values
-            while (elaspedTime < new TimeSpan(0, 0, 30)) 
+            while (elaspedTime < new TimeSpan(0, 0, 10)) 
             {
                 elaspedTime = DateTime.Now - reactionStart;
                 //TimeRemainingTextBox.Text = $"Time Remaining - {elaspedTime.Hours}:{elaspedTime.Minutes}:{elaspedTime.Seconds}";
@@ -84,7 +84,7 @@ namespace PointOfCareApp
                     lastPicTaken = DateTime.Now;
                     firstRun = false;
                 }
-                else if(DateTime.Now - lastPicTaken > new TimeSpan(0,0,10))
+                else if(DateTime.Now - lastPicTaken > new TimeSpan(0,0,3))
                 {
                     CameraPreview.CameraClick.Execute(null);
                     lastPicTaken = DateTime.Now;
@@ -118,6 +118,14 @@ namespace PointOfCareApp
         async void StopButtonClicked(object sender, EventArgs args)
         {
             bool answer = await DisplayAlert("Abort", "Would you like to abort the test?", "Yes", "No");
+            if (answer)
+            {
+                //Send abort http request to NodeMCU
+
+                pics.Clear();
+
+            
+            }
         }
 
 
