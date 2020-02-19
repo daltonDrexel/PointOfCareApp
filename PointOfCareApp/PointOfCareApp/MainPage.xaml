@@ -11,25 +11,25 @@
         <Button Text="NDV"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="Center"
-                Clicked="OnButtonClicked" />
-        <Button Text="Test1"
+                Clicked="OnNDVButtonClicked" />
+        <Button Text="CoronaVirus"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="Center"
-                Clicked="OnButtonClicked" />
+                Clicked="OnCoronaButtonClicked" />
 
         <Button Text="Test2"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="Center"
-                Clicked="OnButtonClicked" />
+                Clicked="Button_Clicked" />
 
         <Button Text="Test3"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="Center"
-                Clicked="OnButtonClicked" />
+                Clicked="Button_Clicked" />
         <Button Text="Custom Test"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="Center"
-                Clicked="OnButtonClicked" />
+                Clicked="Button_Clicked" />
 
 
         <Image Source="drexellogo.png" 

@@ -8,20 +8,30 @@
              x:Class="PointOfCareApp.NDVDash">
     <ContentPage.Content>
         <StackLayout>
-            <ActivityIndicator 
-            Color="Red" 
-            IsRunning="{Binding IsBusy}" 
-            VerticalOptions="Center" 
-            HorizontalOptions="StartAndExpand" />
+            <Label Text="Connect to Node Network to Conduct Test!"
+                x:Name="WifiConnectedTextBox"
+                FontSize="Medium"
+                VerticalOptions="Center" 
+                HorizontalOptions="StartAndExpand" />
             <Button Text="Start"
+                x:Name="StartBtn"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
+                IsEnabled="False"
                 Clicked="StartButtonClicked" />
 
             <Button Text="Stop"
+                x:Name="StopBtn"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"                    
+                IsEnabled="False"
+                Clicked="StopButtonClicked" />
+            
+            <Button Text="Recheck Wifi Connection"
+                x:Name="RecheckConnectionBtn"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
-                Clicked="StopButtonClicked" />
+                Clicked="RecheckConnectionBtn_Clicked" />
             
             <Label Text="00:30:00 Reaction Time"
                 FontSize="Medium"

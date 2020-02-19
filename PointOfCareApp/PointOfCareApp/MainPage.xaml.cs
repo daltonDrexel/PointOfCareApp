@@ -20,7 +20,7 @@ namespace PointOfCareApp
             InitializeComponent();
         }
 
-        async void OnButtonClicked(object sender, EventArgs args)
+        async void OnNDVButtonClicked(object sender, EventArgs args)
         {
             bool answer = await DisplayAlert("Confirm", "Would you like to pick NDV?", "Yes", "No");
             if(answer)
@@ -73,5 +73,14 @@ namespace PointOfCareApp
             return true;
         }
 
+        private void OnCoronaButtonClicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await DisplayAlert("Error","Not Implemented", "OK");
+        }
     }
 }

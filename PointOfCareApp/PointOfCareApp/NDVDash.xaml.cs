@@ -17,11 +17,12 @@ namespace PointOfCareApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NDVDash : ContentPage
     {
-        ClientHandler clientHandler = new ClientHandler();
         ImageProcessHandler imgHand = new ImageProcessHandler();
         public static SortedDictionary<int, Bitmap> pics = new SortedDictionary<int, Bitmap>();
 
         private int currentTemp = 0;
+
+        ClientHandler clientHandler;
 
         private bool firstRun = true;
 
@@ -29,48 +30,52 @@ namespace PointOfCareApp
         private TimeSpan targetTime = new TimeSpan(0,30,0);
         private DateTime lastPicTaken = new DateTime();
 
-        private DateTime reactionStart = new DateTime();
-
-        private bool _isBusy;
-        public bool IsBusy
-        {
-            get { return _isBusy; }
-            set
-            {
-                _isBusy = value;
-                OnPropertyChanged();
-            }
-        }
+        private DateTime reactionStart = new DateTime();        
 
         public NDVDash()
         {
             InitializeComponent();
             CameraPreview.PictureFinished += OnPictureFinished;
+            clientHandler = new ClientHandler();
+            CheckConnection();
         }
 
         async void StartButtonClicked(object sender, EventArgs args)
         {
+            StartBtn.IsEnabled = false;
+            StopBtn.IsEnabled = true;
             Task.Run(StartTest);
         }
 
+        private void CheckConnection()
+        {
+            if (clientHandler.CheckIfConnectedToNode())
+            {
+                WifiConnectedTextBox.Text = "Wifi Connected Ready to Conduct Test";
+                StartBtn.IsEnabled = true;
+            }
+            else
+            {
+                WifiConnectedTextBox.Text = "Connect to Node Network to Conduct Test!";
+            }
+        }
 
         private async void StartTest() 
         {
+
             //Code to use client to send httpRequest to start the test
 
             //Code that waits for the microcontroller to respond back indicating target temp is reached
 
-            DateTime testStart = DateTime.Now;
+            DateTime fakeWarmUpStart = DateTime.Now;
 
             //emulate warm up
             
-            while (DateTime.Now - testStart < new TimeSpan(0, 0, 5)) 
+            while (DateTime.Now - fakeWarmUpStart < new TimeSpan(0, 0, 5)) 
             {
                 Console.WriteLine("inwhile");
-                
-                IsBusy = true;
             }
-            IsBusy = false;
+
             reactionStart = DateTime.Now;
 
             //Test Values
@@ -123,8 +128,8 @@ namespace PointOfCareApp
                 //Send abort http request to NodeMCU
 
                 pics.Clear();
-
-            
+                StopBtn.IsEnabled = false;
+                
             }
         }
 
@@ -132,6 +137,11 @@ namespace PointOfCareApp
         private void OnPictureFinished()
         {
             //DisplayAlert("Confirm", "Picture Taken", "", "Ok");
+        }
+
+        private void RecheckConnectionBtn_Clicked(object sender, EventArgs e)
+        {
+            CheckConnection();
         }
     }
 }

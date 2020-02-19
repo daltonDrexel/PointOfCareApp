@@ -1,4 +1,6 @@
-﻿using Android.Content;
+﻿using Android.App;
+using Android.Content;
+using Android.Net;
 using Android.Net.Wifi;
 using System;
 using System.Linq;
@@ -15,38 +17,53 @@ namespace PointOfCareApp
 
         public ClientHandler()
         {
-            _client = new HttpClient();
-            wifiManager = (WifiManager)Android.App.Application.Context.
-                                        GetSystemService(Context.WifiService);
-
-            //var formattedSsid = $"\"{"ESP8266-Access-Point"}\"";
-            //var formattedPassword = $"\"{"123456789"}\"";
-
-            //var wifiConfig = new WifiConfiguration
-            //{
-            //    Ssid = formattedSsid,
-            //    PreSharedKey = formattedPassword
-            //};
-            //wifiConfig.HiddenSSID = true;
-
-
-            //var addNetwork = wifiManager.AddNetwork(wifiConfig);
-
-
-            //var network = wifiManager.ConfiguredNetworks
-            //                 .FirstOrDefault(n => n.Ssid == "ESP8266-Access-Point");
-
-            //if (network == null)
-            //{
-            //    Console.WriteLine($"Cannot connect to network");
-            //    return;
-            //}
-
             
-            // wifiManager.Disconnect();
-            // var enableNetwork = wifiManager.EnableNetwork(network.NetworkId, true);
-            
+                
+                _client = new HttpClient();
+                wifiManager = (WifiManager)Application.Context.
+                                            GetSystemService(Context.WifiService);
 
+                //var formattedSsid = $"\"{"NodeET"}\"";
+                //var formattedPassword = $"\"{"123456789"}\"";
+
+                //var wifiConfig = new WifiConfiguration
+                //{
+                //    Ssid = formattedSsid,
+                //    PreSharedKey = formattedPassword
+                //};
+                ////wifiConfig.HiddenSSID = true;
+                //wifiConfig.HiddenSSID = false;
+
+
+                //var addNetwork = wifiManager.AddNetwork(wifiConfig);
+
+
+                //var network = wifiManager.ConfiguredNetworks
+                //                 .FirstOrDefault(n => n.Ssid == "NodeET");
+
+                //if (network == null)
+                //{
+                //    Console.WriteLine($"Cannot connect to network");
+                //    return;
+                //}
+
+
+                //wifiManager.Disconnect();
+                //var enableNetwork = wifiManager.EnableNetwork(network.NetworkId, true);
+            }
+
+        public bool CheckIfConnectedToNode()
+        {
+            if (wifiManager != null)
+            {
+                var test = wifiManager.ConnectionInfo.SSID == "\"NodeET\"";
+                return test;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
+
