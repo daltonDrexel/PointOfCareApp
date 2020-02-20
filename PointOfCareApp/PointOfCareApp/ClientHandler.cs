@@ -16,41 +16,42 @@ namespace PointOfCareApp
         WifiManager wifiManager;
 
         public ClientHandler()
-        {
-            
-                
+        {                         
                 _client = new HttpClient();
                 wifiManager = (WifiManager)Application.Context.
                                             GetSystemService(Context.WifiService);
+        }
 
-                //var formattedSsid = $"\"{"NodeET"}\"";
-                //var formattedPassword = $"\"{"123456789"}\"";
-
-                //var wifiConfig = new WifiConfiguration
-                //{
-                //    Ssid = formattedSsid,
-                //    PreSharedKey = formattedPassword
-                //};
-                ////wifiConfig.HiddenSSID = true;
-                //wifiConfig.HiddenSSID = false;
+        public async Task<bool> SendNDVStartRequest()
+        {
+            try
+            {
+                var result = await _client.PostAsync("http://69.69.69.69:80/ndv ", new StringContent("data"));
 
 
-                //var addNetwork = wifiManager.AddNetwork(wifiConfig);
-
-
-                //var network = wifiManager.ConfiguredNetworks
-                //                 .FirstOrDefault(n => n.Ssid == "NodeET");
-
-                //if (network == null)
-                //{
-                //    Console.WriteLine($"Cannot connect to network");
-                //    return;
-                //}
-
-
-                //wifiManager.Disconnect();
-                //var enableNetwork = wifiManager.EnableNetwork(network.NetworkId, true);
+                return result.StatusCode == System.Net.HttpStatusCode.OK;
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            Console.WriteLine();
+            return false;
+        }
+
+        public async Task<bool> SendNDVStopRequest()
+        {
+            var result = await _client.GetAsync("http://69.69.69.69:80/stopndv ");
+
+            return result.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+
+        public async Task<bool> SendNDVCheckTempRequest()
+        {
+            var result = await _client.GetAsync("http://69.69.69.69:80/checkndvtemp ");
+
+            return result.StatusCode == System.Net.HttpStatusCode.OK;
+        }
 
         public bool CheckIfConnectedToNode()
         {

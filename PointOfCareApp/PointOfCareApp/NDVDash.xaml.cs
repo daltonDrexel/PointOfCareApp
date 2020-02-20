@@ -53,6 +53,7 @@ namespace PointOfCareApp
             {
                 WifiConnectedTextBox.Text = "Wifi Connected Ready to Conduct Test";
                 StartBtn.IsEnabled = true;
+                TestRequestBtn.IsEnabled = true;
             }
             else
             {
@@ -142,6 +143,11 @@ namespace PointOfCareApp
         private void RecheckConnectionBtn_Clicked(object sender, EventArgs e)
         {
             CheckConnection();
+        }
+
+        private void TestRequestBtn_Clicked(object sender, EventArgs e)
+        {
+            clientHandler.SendNDVStartRequest();
         }
     }
 }

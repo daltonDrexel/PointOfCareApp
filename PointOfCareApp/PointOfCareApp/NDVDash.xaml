@@ -32,7 +32,13 @@
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 Clicked="RecheckConnectionBtn_Clicked" />
-            
+            <Button Text="TestRequest"
+                x:Name="TestRequestBtn"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                IsEnabled="False"
+                Clicked="TestRequestBtn_Clicked" />
+
             <Label Text="00:30:00 Reaction Time"
                 FontSize="Medium"
                 VerticalOptions="Center" 
