@@ -1,5 +1,6 @@
-﻿using System;
-using System.Drawing;
+﻿using Android.Graphics;
+using System;
+//using System.Drawing;
 using System.Drawing.Imaging;
 using System.Collections.Generic;
 using System.IO;
@@ -15,7 +16,7 @@ namespace PointOfCareApp
     {
         private string path = "C:\\Users\\ccd65\\Desktop\\MOHAMED CHIP";
         //private SortedDictionary<int, Bitmap> data = new SortedDictionary<int, Bitmap>();
-        private Dictionary<int, Dictionary<int, int>> results = new Dictionary<int, Dictionary<int, int>>();
+        private Dictionary<int, Dictionary<DateTime, int>> results = new Dictionary<int, Dictionary<DateTime, int>>();
 
         private int channelOneX = 220;
         private int channelOneXEnd = 290;
@@ -74,26 +75,26 @@ namespace PointOfCareApp
         //    lines.Clear();
         //}
 
-        public void GetIntensitiesFromData(SortedDictionary<int, Bitmap> data)
+        public void GetIntensitiesFromData(SortedDictionary<DateTime, Bitmap> data)
         {
 
-            Dictionary<int, int> channelOneInten = new Dictionary<int, int>();
+            Dictionary<DateTime, int> channelOneInten = new Dictionary<DateTime, int>();
 
-            Dictionary<int, int> channelTwoInten = new Dictionary<int, int>();
+            Dictionary<DateTime, int> channelTwoInten = new Dictionary<DateTime, int>();
 
-            Dictionary<int, int> channelThreeInten = new Dictionary<int, int>();
+            Dictionary<DateTime, int> channelThreeInten = new Dictionary<DateTime, int>();
 
-            Dictionary<int, int> channelFourInten = new Dictionary<int, int>();
 
-            foreach (int key in data.Keys)
+            foreach (DateTime key in data.Keys)
             {
-
+                int color = 0;
                 int intensity = 0;
                 for (int ii = yTop; ii <= yBot; ii++)
                 {
                     for (int i = channelOneX; i <= channelOneXEnd; i++)
                     {
-                        intensity = intensity + data[key].GetPixel(i, ii).G;
+                        color = data[key].GetPixel(i, ii);
+                        intensity = intensity + ((color >> 8) & 0xff);
                     }
                 }
 
@@ -101,16 +102,17 @@ namespace PointOfCareApp
             }
             results.Add(1, channelOneInten);
 
-            foreach (int key in data.Keys)
+            foreach (DateTime key in data.Keys)
             {
-
+                int color = 0;
                 int intensity = 0;
 
                 for (int ii = yTop; ii <= yBot; ii++)
                 {
                     for (int i = channelTwoX; i <= channelTwoXEnd; i++)
                     {
-                        intensity = intensity + data[key].GetPixel(i, ii).G;
+                        color = data[key].GetPixel(i, ii);
+                        intensity = intensity + ((color >> 8) & 0xff);
                     }
                 }
 
@@ -118,40 +120,23 @@ namespace PointOfCareApp
             }
             results.Add(2, channelTwoInten);
 
-            foreach (int key in data.Keys)
+            foreach (DateTime key in data.Keys)
             {
-
+                int color = 0;
                 int intensity = 0;
 
                 for (int ii = yTop; ii <= yBot; ii++)
                 {
                     for (int i = channelThreeX; i <= channelThreeXEnd; i++)
                     {
-                        intensity = intensity + data[key].GetPixel(i, ii).G;
+                        color = data[key].GetPixel(i, ii);
+                        intensity = intensity + ((color >> 8) & 0xff);
                     }
                 }
 
                 channelThreeInten.Add(key, intensity);
             }
             results.Add(3, channelThreeInten);
-
-            foreach (int key in data.Keys)
-            {
-
-                int intensity = 0;
-
-                for (int ii = yTop; ii <= yBot; ii++)
-                {
-                    for (int i = channelFourX; i <= channelFourXEnd; i++)
-                    {
-                        intensity = intensity + data[key].GetPixel(i, ii).G;
-                    }
-                }
-
-                channelFourInten.Add(key, intensity);
-            }
-            results.Add(4, channelFourInten);
-            Console.WriteLine();
         }
 
 

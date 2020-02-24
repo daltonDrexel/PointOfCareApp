@@ -18,6 +18,7 @@ namespace PointOfCareApp
         public ClientHandler()
         {                         
                 _client = new HttpClient();
+               _client.Timeout = new TimeSpan(0,10,0);
                 wifiManager = (WifiManager)Application.Context.
                                             GetSystemService(Context.WifiService);
         }
@@ -29,7 +30,10 @@ namespace PointOfCareApp
                 var result = await _client.PostAsync("http://69.69.69.69:80/ndv ", new StringContent("data"));
 
 
-                return result.StatusCode == System.Net.HttpStatusCode.OK;
+                var test = result.StatusCode == System.Net.HttpStatusCode.OK;
+
+                Console.WriteLine();
+                return test;
             }
             catch (Exception e)
             {
@@ -48,9 +52,14 @@ namespace PointOfCareApp
 
         public async Task<bool> SendNDVCheckTempRequest()
         {
-            var result = await _client.GetAsync("http://69.69.69.69:80/checkndvtemp ");
+            var result = await _client.GetAsync("http://69.69.69.69:80/tempCheck");
 
-            return result.StatusCode == System.Net.HttpStatusCode.OK;
+            if (result.StatusCode == System.Net.HttpStatusCode.OK)
+            { return true; }
+            else if (result.StatusCode == System.Net.HttpStatusCode.NoContent)
+            { return false; }
+            else
+            { throw new Exception("Node Messing Up"); }
         }
 
         public bool CheckIfConnectedToNode()

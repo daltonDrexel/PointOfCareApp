@@ -16,8 +16,6 @@ namespace PointOfCareApp.Camera2
         private CameraPreview _currentElement;
         private readonly Context _context;
 
-        private int picIndex = 1;
-
         public CameraViewServiceRenderer(Context context) : base(context)
         {
             _context = context;
@@ -52,8 +50,7 @@ namespace PointOfCareApp.Camera2
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.InMutable = true;
                 Bitmap bmp = BitmapFactory.DecodeByteArray(imgSource, 0, imgSource.Length, options);
-                NDVDash.pics.Add(picIndex, bmp);
-                picIndex++;
+                NDVDash.pics.Add(DateTime.Now, bmp);
                 Console.WriteLine();
             }
             catch (Exception ex)

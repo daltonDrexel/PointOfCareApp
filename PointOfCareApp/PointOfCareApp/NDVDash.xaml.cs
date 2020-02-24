@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using PointOfCareApp.CustomViews;
-using Android.Graphics;
+using System.Drawing;
 using System.Threading;
+using System.IO;
 
 namespace PointOfCareApp
 {
@@ -18,7 +19,7 @@ namespace PointOfCareApp
     public partial class NDVDash : ContentPage
     {
         ImageProcessHandler imgHand = new ImageProcessHandler();
-        public static SortedDictionary<int, Bitmap> pics = new SortedDictionary<int, Bitmap>();
+        public static SortedDictionary<DateTime, Android.Graphics.Bitmap> pics = new SortedDictionary<DateTime, Android.Graphics.Bitmap>();
 
         private int currentTemp = 0;
 
@@ -64,23 +65,19 @@ namespace PointOfCareApp
         private async void StartTest() 
         {
 
-            //Code to use client to send httpRequest to start the test
+            var gotOKStatus = await clientHandler.SendNDVStartRequest();
 
-            //Code that waits for the microcontroller to respond back indicating target temp is reached
-
-            DateTime fakeWarmUpStart = DateTime.Now;
-
-            //emulate warm up
-            
-            while (DateTime.Now - fakeWarmUpStart < new TimeSpan(0, 0, 5)) 
+            while (!clientHandler.SendNDVCheckTempRequest().Result)
             {
-                Console.WriteLine("inwhile");
+                Thread.Sleep(1000);
             }
+
+            Console.WriteLine();
 
             reactionStart = DateTime.Now;
 
             //Test Values
-            while (elaspedTime < new TimeSpan(0, 0, 10)) 
+            while (elaspedTime < new TimeSpan(0, 0, 15)) 
             {
                 elaspedTime = DateTime.Now - reactionStart;
                 //TimeRemainingTextBox.Text = $"Time Remaining - {elaspedTime.Hours}:{elaspedTime.Minutes}:{elaspedTime.Seconds}";
@@ -98,6 +95,9 @@ namespace PointOfCareApp
             
             }
 
+            //imgHand.GetIntensitiesFromData(pics);
+
+            await SaveResultsAsync();
 
             //Real Values
             //while (elaspedTime < targetTime)
@@ -134,6 +134,14 @@ namespace PointOfCareApp
             }
         }
 
+        public async Task SaveResultsAsync()
+        {
+            var backingFile = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "count.txt");
+            using (var writer = File.CreateText(backingFile))
+            {
+                await writer.WriteLineAsync("1");
+            }
+        }
 
         private void OnPictureFinished()
         {
@@ -145,9 +153,11 @@ namespace PointOfCareApp
             CheckConnection();
         }
 
-        private void TestRequestBtn_Clicked(object sender, EventArgs e)
+        private async void TestRequestBtn_Clicked(object sender, EventArgs e)
         {
-            clientHandler.SendNDVStartRequest();
+            var upToTemp = await clientHandler.SendNDVStartRequest();
+            Console.WriteLine();
+
         }
     }
 }

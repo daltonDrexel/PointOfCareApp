@@ -301,7 +301,8 @@ namespace PointOfCareApp.Camera2
         {
             if (_flashSupported)
             {
-                requestBuilder.Set(CaptureRequest.ControlAeMode, (int)ControlAEMode.OnAutoFlash);
+                requestBuilder.Set(CaptureRequest.ControlAeMode, (int)ControlAEMode.Off);
+                //requestBuilder.Set(CaptureRequest.ControlAeMode, (int)ControlAEMode.OnAutoFlash);
             }
         }
 
