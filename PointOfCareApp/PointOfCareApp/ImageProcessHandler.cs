@@ -90,7 +90,7 @@ namespace PointOfCareApp
                     {
                         for (int ii = 0; ii < data[key].Width; ii++)
                         {
-                            greens.Add(data[key].GetPixel(ii, i));
+                            greens.Add((data[key].GetPixel(ii, i) >> 8) & 0xff);
                         }
                     }
                     ret.Add(key, greens);
