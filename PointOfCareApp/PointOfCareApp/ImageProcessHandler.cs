@@ -75,6 +75,36 @@ namespace PointOfCareApp
         //    lines.Clear();
         //}
 
+
+        public async Task<SortedDictionary<DateTime, List<int>>> GetAllGreenPixelsFromImage(SortedDictionary<DateTime, Bitmap> data) 
+        {
+
+            SortedDictionary<DateTime, List<int>> ret = new SortedDictionary<DateTime, List<int>>();
+            try
+            {
+                foreach (DateTime key in data.Keys)
+                {
+                    List<int> greens = new List<int>();
+
+                    for (int i = 0; i < data[key].Height; i++)
+                    {
+                        for (int ii = 0; ii < data[key].Width; ii++)
+                        {
+                            greens.Add(data[key].GetPixel(ii, i));
+                        }
+                    }
+                    ret.Add(key, greens);
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return ret;
+        }
+
+
+
         public void GetIntensitiesFromData(SortedDictionary<DateTime, Bitmap> data)
         {
 

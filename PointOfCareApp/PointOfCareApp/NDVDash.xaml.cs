@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 using PointOfCareApp.CustomViews;
 using System.Drawing;
 using System.Threading;
@@ -39,6 +40,9 @@ namespace PointOfCareApp
             CameraPreview.PictureFinished += OnPictureFinished;
             clientHandler = new ClientHandler();
             CheckConnection();
+            //For debugging file writer 
+            StartBtn.IsEnabled = true;
+
         }
 
         async void StartButtonClicked(object sender, EventArgs args)
@@ -46,6 +50,7 @@ namespace PointOfCareApp
             StartBtn.IsEnabled = false;
             StopBtn.IsEnabled = true;
             Task.Run(StartTest);
+            //await SaveResultsAsync();
         }
 
         private void CheckConnection()
@@ -65,19 +70,19 @@ namespace PointOfCareApp
         private async void StartTest() 
         {
 
-            var gotOKStatus = await clientHandler.SendNDVStartRequest();
+            //var gotOKStatus = await clientHandler.SendNDVStartRequest();
 
-            while (!clientHandler.SendNDVCheckTempRequest().Result)
-            {
+            //while (!clientHandler.SendNDVCheckTempRequest().Result)
+            //{
                 Thread.Sleep(1000);
-            }
-
+            //}
+        
             Console.WriteLine();
 
             reactionStart = DateTime.Now;
 
             //Test Values
-            while (elaspedTime < new TimeSpan(0, 0, 15)) 
+            while (elaspedTime < new TimeSpan(0, 0, 10)) 
             {
                 elaspedTime = DateTime.Now - reactionStart;
                 //TimeRemainingTextBox.Text = $"Time Remaining - {elaspedTime.Hours}:{elaspedTime.Minutes}:{elaspedTime.Seconds}";
@@ -96,8 +101,9 @@ namespace PointOfCareApp
             }
 
             //imgHand.GetIntensitiesFromData(pics);
+            
 
-            await SaveResultsAsync();
+            await SaveResultsAsync(await imgHand.GetAllGreenPixelsFromImage(pics));
 
             //Real Values
             //while (elaspedTime < targetTime)
@@ -126,7 +132,7 @@ namespace PointOfCareApp
             bool answer = await DisplayAlert("Abort", "Would you like to abort the test?", "Yes", "No");
             if (answer)
             {
-                //Send abort http request to NodeMCU
+                var gotOKStatus = await clientHandler.SendNDVStopRequest();
 
                 pics.Clear();
                 StopBtn.IsEnabled = false;
@@ -134,14 +140,25 @@ namespace PointOfCareApp
             }
         }
 
-        public async Task SaveResultsAsync()
+        public async Task SaveResultsAsync(SortedDictionary<DateTime, List<int>> saveMe)
         {
-            var backingFile = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "count.txt");
-            using (var writer = File.CreateText(backingFile))
+            //puts the text file in the movies DIR good enough for now 
+            var newDir = System.IO.Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, Android.OS.Environment.DirectoryMovies);
+            foreach (DateTime key in saveMe.Keys)
             {
-                await writer.WriteLineAsync("1");
+                var fileNamePath = Path.Combine(newDir, $"{key.Second.ToString()}.txt");
+                using (var writer = File.CreateText(fileNamePath))
+                {
+                    foreach (int i in saveMe[key])
+                    {
+                        await writer.WriteLineAsync(i.ToString());
+                    }
+                }
             }
+            Console.WriteLine("Done");
         }
+
+
 
         private void OnPictureFinished()
         {
