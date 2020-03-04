@@ -18,7 +18,7 @@ namespace PointOfCareApp
         public ClientHandler()
         {                         
                 _client = new HttpClient();
-               _client.Timeout = new TimeSpan(0,10,0);
+               //_client.Timeout = new TimeSpan(0,10,0);
                 wifiManager = (WifiManager)Application.Context.
                                             GetSystemService(Context.WifiService);
         }

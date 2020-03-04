@@ -10,6 +10,7 @@
         <StackLayout>
             <Label Text="Connect to Node Network to Conduct Test!"
                 x:Name="WifiConnectedTextBox"
+                BackgroundColor="Red"
                 FontSize="Medium"
                 VerticalOptions="Center" 
                 HorizontalOptions="StartAndExpand" />

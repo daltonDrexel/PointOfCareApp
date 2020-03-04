@@ -55,16 +55,17 @@ namespace PointOfCareApp
 
         private void CheckConnection()
         {
-            if (clientHandler.CheckIfConnectedToNode())
-            {
+            //if (clientHandler.CheckIfConnectedToNode())
+            //{
                 WifiConnectedTextBox.Text = "Wifi Connected Ready to Conduct Test";
+                WifiConnectedTextBox.BackgroundColor = Xamarin.Forms.Color.Green;
                 StartBtn.IsEnabled = true;
                 TestRequestBtn.IsEnabled = true;
-            }
-            else
-            {
-                WifiConnectedTextBox.Text = "Connect to Node Network to Conduct Test!";
-            }
+            //}
+            //else
+            //{
+                //WifiConnectedTextBox.Text = "Connect to Node Network to Conduct Test!";
+            //}
         }
 
         private async void StartTest() 
@@ -103,7 +104,7 @@ namespace PointOfCareApp
             //imgHand.GetIntensitiesFromData(pics);
             
 
-            await SaveResultsAsync(await imgHand.GetAllGreenPixelsFromImage(pics));
+            //await SaveResultsAsync(await imgHand.GetAllGreenPixelsFromImage(pics));
 
             //Real Values
             //while (elaspedTime < targetTime)
