@@ -16,7 +16,7 @@ namespace PointOfCareApp
     {
         private string path = "C:\\Users\\ccd65\\Desktop\\MOHAMED CHIP";
         //private SortedDictionary<int, Bitmap> data = new SortedDictionary<int, Bitmap>();
-        private Dictionary<int, Dictionary<DateTime, int>> results = new Dictionary<int, Dictionary<DateTime, int>>();
+        public Dictionary<int, Dictionary<DateTime, int>> results = new Dictionary<int, Dictionary<DateTime, int>>();
 
         private int channelOneX = 220;
         private int channelOneXEnd = 290;

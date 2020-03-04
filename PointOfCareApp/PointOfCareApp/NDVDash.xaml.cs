@@ -13,6 +13,9 @@ using PointOfCareApp.CustomViews;
 using System.Drawing;
 using System.Threading;
 using System.IO;
+using Microcharts;
+using SkiaSharp;
+using OxyPlot;
 
 namespace PointOfCareApp
 {
@@ -27,6 +30,8 @@ namespace PointOfCareApp
         ClientHandler clientHandler;
 
         private bool firstRun = true;
+
+        
 
         private TimeSpan elaspedTime = new TimeSpan();
         private TimeSpan targetTime = new TimeSpan(0,30,0);
@@ -47,9 +52,86 @@ namespace PointOfCareApp
 
         async void StartButtonClicked(object sender, EventArgs args)
         {
-            StartBtn.IsEnabled = false;
-            StopBtn.IsEnabled = true;
-            Task.Run(StartTest);
+            int[] intensityTest = new int[] { 423215,
+                                                421240,
+                                                273375,
+                                                247353,
+                                                242193,
+                                                245180,
+                                                244120,
+                                                244488,
+                                                244261,
+                                                245852,
+                                                246177,
+                                                246009,
+                                                248261,
+                                                248550,
+                                                254064,
+                                                268421,
+                                                298742,
+                                                338754,
+                                                350944,
+                                                358468,
+                                                360950,
+                                                363501,
+                                                362925,
+                                                366354,
+                                                361763,
+                                                359153,
+                                                359069,
+                                                358452,
+                                                355486,
+                                                359751,
+                                                349146};
+
+            int[] intesnsityTest2 = new int[] { 416165,
+                                            337221,
+                                            260125,
+                                            223279,
+                                            213163,
+                                            207053,
+                                            207391,
+                                            205382,
+                                            203425,
+                                            203642,
+                                            204047,
+                                            203077,
+                                            203304,
+                                            202129,
+                                            202052,
+                                            214281,
+                                            233050,
+                                            258059,
+                                            271651,
+                                            273743,
+                                            274307,
+                                            276295,
+                                            275945,
+                                            275709,
+                                            274326,
+                                            276528,
+                                            269673,
+                                            268995,
+                                            269216,
+                                            268859,
+                                            266063};
+
+            List<DataPoint> chan1 = new List<DataPoint>();
+
+            int i = 0;
+            foreach (var data in intensityTest) 
+            {
+                chan1.Add(new DataPoint(i,data));
+                i++;
+            }
+
+           
+
+            await Navigation.PushAsync(new Results(chan1) {Title = "NDV Test Results"});
+            //Testing Chart
+            //StartBtn.IsEnabled = false;
+            //StopBtn.IsEnabled = true;
+            //Task.Run(StartTest);
             //await SaveResultsAsync();
         }
 
@@ -102,7 +184,7 @@ namespace PointOfCareApp
             }
 
             //imgHand.GetIntensitiesFromData(pics);
-            
+
 
             //await SaveResultsAsync(await imgHand.GetAllGreenPixelsFromImage(pics));
 
@@ -124,6 +206,15 @@ namespace PointOfCareApp
             //    }
 
             //}
+
+
+            //imgHand.GetIntensitiesFromData(pics);
+            List<DataPoint> chan1 = new List<DataPoint>();
+
+            foreach (var intensityDateTime in imgHand.results[0].Keys) 
+            {
+                chan1.Add(new DataPoint(intensityDateTime.Minute, imgHand.results[0][intensityDateTime]));
+            }
 
             Console.WriteLine();
         }
