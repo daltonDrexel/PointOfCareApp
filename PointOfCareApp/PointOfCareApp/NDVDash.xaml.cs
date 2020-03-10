@@ -124,10 +124,19 @@ namespace PointOfCareApp
                 chan1.Add(new DataPoint(i,data));
                 i++;
             }
+            List<DataPoint> chan2 = new List<DataPoint>();
 
-           
+            int ii = 0;
+            foreach (var data in intesnsityTest2)
+            {
+                chan2.Add(new DataPoint(ii, data));
+                ii++;
+            }
 
-            await Navigation.PushAsync(new Results(chan1) {Title = "NDV Test Results"});
+            List<List<DataPoint>> testList = new List<List<DataPoint>>();
+            testList.Add(chan1);
+            testList.Add(chan2);
+            await Navigation.PushAsync(new Results(testList) {Title = "NDV Test Results"});
             //Testing Chart
             //StartBtn.IsEnabled = false;
             //StopBtn.IsEnabled = true;
