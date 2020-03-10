@@ -50,7 +50,7 @@ namespace PointOfCareApp.Camera2
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.InMutable = true;
                 Bitmap bmp = BitmapFactory.DecodeByteArray(imgSource, 0, imgSource.Length, options);
-                NDVDash.pics.Add(DateTime.Now, bmp);
+                CoronaDash.pics.Add(DateTime.Now, bmp);
                 Console.WriteLine();
             }
             catch (Exception ex)

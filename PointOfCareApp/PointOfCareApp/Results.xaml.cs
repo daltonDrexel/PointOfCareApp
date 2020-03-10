@@ -20,8 +20,8 @@ namespace PointOfCareApp
         {
             InitializeComponent();
             plotView.Model = new OxyPlot.PlotModel();
-            plotView.Model.Axes.Add(new LinearAxis() { Position = AxisPosition.Bottom,  Minimum = 0});
-            plotView.Model.Axes.Add(new LinearAxis() { Position = AxisPosition.Left, Minimum = 0 });
+            plotView.Model.Axes.Add(new LinearAxis() { Position = AxisPosition.Bottom,  Minimum = 0, Title = "Time [min]" });
+            plotView.Model.Axes.Add(new LinearAxis() { Position = AxisPosition.Left, Minimum = 0, Title = "Fluorescence Intensity" }); 
 
             var s1 = new LineSeries()
             {

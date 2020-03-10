@@ -20,7 +20,7 @@ using OxyPlot;
 namespace PointOfCareApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NDVDash : ContentPage
+    public partial class CoronaDash : ContentPage
     {
         ImageProcessHandler imgHand = new ImageProcessHandler();
         public static SortedDictionary<DateTime, Android.Graphics.Bitmap> pics = new SortedDictionary<DateTime, Android.Graphics.Bitmap>();
@@ -39,7 +39,7 @@ namespace PointOfCareApp
 
         private DateTime reactionStart = new DateTime();        
 
-        public NDVDash()
+        public CoronaDash()
         {
             InitializeComponent();
             CameraPreview.PictureFinished += OnPictureFinished;
@@ -136,7 +136,7 @@ namespace PointOfCareApp
             List<List<DataPoint>> testList = new List<List<DataPoint>>();
             testList.Add(chan1);
             testList.Add(chan2);
-            await Navigation.PushAsync(new Results(testList) {Title = "NDV Test Results"});
+            await Navigation.PushAsync(new Results(testList) {Title = "COVID-19 Test Results"});
             //Testing Chart
             //StartBtn.IsEnabled = false;
             //StopBtn.IsEnabled = true;

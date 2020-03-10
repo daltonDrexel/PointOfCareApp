@@ -8,14 +8,14 @@
 
     <StackLayout>
         <!-- Place new controls here -->
+        <Button Text="Corona Virus"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="OnCoronaButtonClicked" />
         <Button Text="NDV"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="Center"
                 Clicked="OnNDVButtonClicked" />
-        <Button Text="CoronaVirus"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="Center"
-                Clicked="OnCoronaButtonClicked" />
 
         <Button Text="Test2"
                 VerticalOptions="CenterAndExpand"

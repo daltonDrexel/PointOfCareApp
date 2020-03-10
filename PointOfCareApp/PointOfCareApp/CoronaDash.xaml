@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:cameraView="clr-namespace:PointOfCareApp.CustomViews"
              mc:Ignorable="d"
-             x:Class="PointOfCareApp.NDVDash">
+             x:Class="PointOfCareApp.CoronaDash">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Connect to Node Network to Conduct Test!"

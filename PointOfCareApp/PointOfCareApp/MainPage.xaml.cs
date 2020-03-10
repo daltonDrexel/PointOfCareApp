@@ -20,11 +20,11 @@ namespace PointOfCareApp
             InitializeComponent();
         }
 
-        async void OnNDVButtonClicked(object sender, EventArgs args)
+        async void OnCoronaButtonClicked(object sender, EventArgs args)
         {
-            bool answer = await DisplayAlert("Confirm", "Would you like to pick NDV?", "Yes", "No");
+            bool answer = await DisplayAlert("Confirm", "Would you like to pick Corona Virus?", "Yes", "No");
             if(answer)
-                await Navigation.PushAsync(new NDVDash() { Title = "NDV Test Dashboard" });
+                await Navigation.PushAsync(new CoronaDash() { Title = "COVID-19 Test Dashboard" });
         }
 
         async protected override void OnAppearing()
@@ -73,7 +73,7 @@ namespace PointOfCareApp
             return true;
         }
 
-        private void OnCoronaButtonClicked(object sender, EventArgs e)
+        private void OnNDVButtonClicked(object sender, EventArgs e)
         {
 
         }
